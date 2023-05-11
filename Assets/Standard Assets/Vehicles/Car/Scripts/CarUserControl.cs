@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
+using UnityEngine.Windows;
 using UnityStandardAssets.CrossPlatformInput;
+
 
 namespace UnityStandardAssets.Vehicles.Car
 {
@@ -11,6 +13,8 @@ namespace UnityStandardAssets.Vehicles.Car
 
         public bool canDrive;
 
+
+        
         private void Awake()
         {
             // get the car controller
@@ -22,6 +26,7 @@ namespace UnityStandardAssets.Vehicles.Car
         {
             if (canDrive)
             {
+                
                 // pass the input to the car!
                 float h = CrossPlatformInputManager.GetAxis("Horizontal");
                 float v = CrossPlatformInputManager.GetAxis("Vertical");

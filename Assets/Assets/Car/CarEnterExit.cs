@@ -4,24 +4,27 @@ using UnityEngine;
 using UnityStandardAssets.Vehicles.Car;
 using UnityStandardAssets.CrossPlatformInput;
 using StarterAssets;
+using UnityEngine.InputSystem;
 
 public class CarEnterExit : MonoBehaviour
 {
     public GameObject Car;
     public GameObject carSeat;
     public GameObject player;
-    public GameObject cameraRoot;
+
+    public GameObject playerPositionOutsideCar;
 
     public GameObject CameraPlayer;
     public GameObject CameraCar;
 
     bool canDrive;
-    
+    bool playerInside;
 
     private void Awake()
     {
         Car = GameObject.FindGameObjectWithTag("Car");
         player = GameObject.FindGameObjectWithTag("Player");
+        
     }
     // Start is called before the first frame update
     void Start()
@@ -50,6 +53,22 @@ public class CarEnterExit : MonoBehaviour
             //switch cameras
             CameraPlayer.SetActive(false);
             CameraCar.SetActive(true);
+
+            playerInside = true;
+            canDrive = false;
+        }
+        else if (playerInside && Input.GetKeyDown(KeyCode.E) && canDrive== false)
+        {
+            playerInside = false;
+            player.transform.SetParent(null);
+            player.transform.position = playerPositionOutsideCar.transform.position;
+            player.GetComponent<ThirdPersonController>().enabled = true;
+            player.GetComponent<CharacterController>().enabled = true;
+            player.GetComponent<Animator>().SetBool("isDriving", false);
+            Car.GetComponent<CarUserControl>().canDrive = false;
+
+            CameraPlayer.SetActive(true);
+            CameraCar.SetActive(false);
         }
     }
 
