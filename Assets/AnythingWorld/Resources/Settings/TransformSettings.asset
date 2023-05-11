@@ -34,15 +34,10 @@ MonoBehaviour:
   objectPosition: {x: 0, y: 0, z: 0}
   objectRotation: {x: 0, y: 0, z: 0}
   objectScaleMultiplier: 0.5
-  defaultRiggedScript: {fileID: 11500000, guid: 070bcd503675d784a96714fe4a828116,
-    type: 3}
-  defaultVehicleScript: {fileID: 11500000, guid: 16399812777ed4d48beda28b2509eb63,
-    type: 3}
-  defaultFlyingVehicleScript: {fileID: 11500000, guid: e6ece7e595dc53d4497b59abf9ccbf86,
-    type: 3}
-  defaultFlyingAnimalScript: {fileID: 11500000, guid: ff91cee89362cf94cb6a88a41ef54bf3,
-    type: 3}
+  defaultRiggedScript: {fileID: 11500000, guid: 070bcd503675d784a96714fe4a828116, type: 3}
+  defaultVehicleScript: {fileID: 11500000, guid: 16399812777ed4d48beda28b2509eb63, type: 3}
+  defaultFlyingVehicleScript: {fileID: 11500000, guid: e6ece7e595dc53d4497b59abf9ccbf86, type: 3}
+  defaultFlyingAnimalScript: {fileID: 11500000, guid: ff91cee89362cf94cb6a88a41ef54bf3, type: 3}
   defaultStaticScript: {fileID: 0}
   defaultShaderScript: {fileID: 0}
-  defaultSwimmingAnimalScript: {fileID: 11500000, guid: 6015225da77fb74419d09601710d49b8,
-    type: 3}
+  defaultSwimmingAnimalScript: {fileID: 11500000, guid: 6015225da77fb74419d09601710d49b8, type: 3}
