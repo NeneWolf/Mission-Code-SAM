@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class SamBehaviour : MonoBehaviour
 {
     [SerializeField] int health = 100;
-    int currentHealth;
+    public int currentHealth;
     
     public NavMeshAgent friend;
     public Transform player;
