@@ -15,7 +15,7 @@ MonoBehaviour:
   animateModel: 1
   placeOnGround: 1
   placeOnGrid: 1
-  serializeAsset: 0
+  serializeAsset: 1
   addCollider: 0
   addRigidbody: 0
   showGridHandles: 0
