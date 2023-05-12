@@ -41,10 +41,12 @@ public class CarEnterExit : MonoBehaviour
     {
         if (canDrive && Input.GetKeyDown(KeyCode.E))
         {
+            player.GetComponent<ThirdPersonShooterController>().CanShoot(false);
             StartDriving();
         }
         else if (playerInside && Input.GetKeyDown(KeyCode.E) && canDrive== false)
         {
+            player.GetComponent<ThirdPersonShooterController>().CanShoot(true);
             ExitCar();
         }
     }
