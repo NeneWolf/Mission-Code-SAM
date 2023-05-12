@@ -6,10 +6,16 @@ public class CanvasManager : MonoBehaviour
 {
     [SerializeField] private GameObject carInteractUI;
     [SerializeField] private GameObject carInstructionsUI;
+    [SerializeField] private GameObject aimingUI;
 
     public void TurnCarInteraction(bool status)
     {
         carInteractUI.SetActive(status);
+    }
+
+    public void TurnAiming(bool status)
+    {
+        aimingUI.SetActive(status);
     }
 
     public void TurnOnCarInstruction()

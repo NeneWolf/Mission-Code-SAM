@@ -13,6 +13,8 @@ public class ThirdPersonShooterController : MonoBehaviour
     private ThirdPersonController thirdPersonController;
     private Animator animator;
 
+    private CanvasManager _canvas;
+
     [SerializeField] GameObject weapon;
 
     [SerializeField] int maxBullet = 3;
@@ -34,6 +36,7 @@ public class ThirdPersonShooterController : MonoBehaviour
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         thirdPersonController = GetComponent<ThirdPersonController>();
         animator = GetComponent<Animator>();
+        _canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<CanvasManager>();
     }
     
     void Start()
@@ -66,6 +69,7 @@ public class ThirdPersonShooterController : MonoBehaviour
         if (canShoot && starterAssetsInputs.aim)
         {
             weapon.SetActive(true);
+            _canvas.TurnAiming(true);
 
             //Set aiming target to mouse position|| Turn off character rotation to rotate with the aiming direction
             thirdPersonController.SetRotateOnMove(false);
@@ -88,6 +92,7 @@ public class ThirdPersonShooterController : MonoBehaviour
         else
         {
             weapon.SetActive(false);
+            _canvas.TurnAiming(false);
             aimVirtualCamera.gameObject.SetActive(false);
             thirdPersonController.SetRotateOnMove(true);
             animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 0f, Time.deltaTime * 10f));
