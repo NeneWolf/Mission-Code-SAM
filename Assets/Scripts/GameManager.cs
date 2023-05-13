@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public bool hasActivatedMission = false;
     UnityEngine.SceneManagement.Scene currentScene;
 
+    ThirdPersonShooterController player;
+
     bool stopTimer =  false;
 
     CanvasManager canvasManager;
@@ -38,7 +40,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(hasActivatedMission)
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonShooterController>();
+        
+        if (hasActivatedMission)
             currentScene = SceneManager.GetActiveScene();
         
         if (hasActivatedMission && !stopTimer)
@@ -49,8 +53,8 @@ public class GameManager : MonoBehaviour
             StartCountDown();
         }
 
-        //Test
-        if (restartGame || timer <= 0)
+        //Conditions to Restart Mission
+        if (restartGame || timer <= 0 || player.ReturnCurrentHealth() <= 0)
             RestartMission();
     }
 

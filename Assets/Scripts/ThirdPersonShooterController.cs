@@ -9,6 +9,9 @@ using UnityEngine.SceneManagement;
 
 public class ThirdPersonShooterController : MonoBehaviour
 {
+    [SerializeField] private int health = 100;
+    public int currentHealth;
+    
     [SerializeField]
     private CinemachineVirtualCamera aimVirtualCamera;
     private StarterAssetsInputs starterAssetsInputs;
@@ -46,6 +49,7 @@ public class ThirdPersonShooterController : MonoBehaviour
     {
         currentBulletCount = maxBullet;
         scene = SceneManager.GetActiveScene();
+        currentHealth = health;
     }
     
     private void Update()
@@ -107,7 +111,6 @@ public class ThirdPersonShooterController : MonoBehaviour
         }
     }
 
-
     void SpawnBullet()
     {
         currentBulletCount--;
@@ -119,5 +122,22 @@ public class ThirdPersonShooterController : MonoBehaviour
     public void CanShoot(bool status)
     {
         canShoot = status;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (currentHealth - damage <= 0)
+        {
+            currentHealth = 0;
+        }
+        else if (currentHealth - damage > 0)
+        {
+            currentHealth -= damage;
+        }
+    }
+
+    public int ReturnCurrentHealth()
+    {
+        return currentHealth;
     }
 }
