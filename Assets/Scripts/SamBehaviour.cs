@@ -7,6 +7,9 @@ public class SamBehaviour : MonoBehaviour
 {
     [SerializeField] int health = 100;
     public int currentHealth;
+
+    [SerializeField] int maxAmountOfDeath;
+    public int currentAmountOfDeath;
     
     public NavMeshAgent friend;
     public Transform player;
@@ -38,6 +41,7 @@ public class SamBehaviour : MonoBehaviour
     {
         _animSpeed = Animator.StringToHash("Speed");
         currentHealth = health;
+        currentAmountOfDeath = maxAmountOfDeath;
     }
 
     // Update is called once per frame
@@ -96,13 +100,23 @@ public class SamBehaviour : MonoBehaviour
 
     void GoingDown()
     {
+   
         capsuleCollider.enabled = false;
         transform.position = new Vector3(transform.position.x, -0.805f, transform.position.z);
         followPlayer = false;
-        interactBoxCollider.enabled = true;
+
+        if(currentAmountOfDeath <= 0)
+        {
+            GameManager gameManager = GameObject.FindObjectOfType<GameManager>();
+            gameManager.Restart(true);
+        }else
+            interactBoxCollider.enabled = true;
+
+
         _anim.SetBool("isDown", true);
         friend.enabled = false;
         Destroy(this.GetComponent<Rigidbody>());
+
     }
     
     public void DisableSamMovement()
@@ -116,6 +130,14 @@ public class SamBehaviour : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        if(currentHealth - damage <= 0)
+        {
+            currentAmountOfDeath--;
+            currentHealth = 0;
+        }
+        else if (currentHealth - damage > 0)
+        {
+            currentHealth -= damage;
+        }
     }
 }

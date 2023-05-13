@@ -78,10 +78,6 @@ public class DialogueSystem: MonoBehaviour {
         StartDialogue();
     }
 
-
-
-    
-
     private IEnumerator StartDialogue()
     {
         if (outOfRange == false)

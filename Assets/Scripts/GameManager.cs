@@ -6,13 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    float timer = 10.0f;
+    [SerializeField] float missionTimer = 720.0f;
+    float timer;
     public bool hasActivatedMission = false;
     UnityEngine.SceneManagement.Scene currentScene;
 
+    bool stopTimer =  false;
+
     CanvasManager canvasManager;
 
-
+    public bool restartGame = false;
+    
     private void Awake()
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("GameManager");
@@ -21,15 +25,14 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        
-        DontDestroyOnLoad(this.gameObject);
-        canvasManager = GameManager.FindObjectOfType<CanvasManager>();
-    }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
+        else
+            DontDestroyOnLoad(this.gameObject);
 
+    }
+
+    private void Start()
+    {
+        timer = missionTimer;
     }
 
     // Update is called once per frame
@@ -38,14 +41,17 @@ public class GameManager : MonoBehaviour
         if(hasActivatedMission)
             currentScene = SceneManager.GetActiveScene();
         
-        if (hasActivatedMission && currentScene.name == "Playground")
+        if (hasActivatedMission && !stopTimer)
         {
+            canvasManager = GameObject.FindObjectOfType<CanvasManager>();
             canvasManager.TurnOnMissionUI(true);
-            canvasManager.MissionNameTime(timer);
+            canvasManager.StartMissionTimer(timer);
             StartCountDown();
         }
 
-        print(currentScene.name);
+        //Test
+        if (restartGame || timer <= 0)
+            RestartMission();
     }
 
     public void StartCountDown()
@@ -59,11 +65,43 @@ public class GameManager : MonoBehaviour
             timer = 0;
         }
 
-        canvasManager.MissionNameTime(timer);
+        canvasManager.StartMissionTimer(timer);
     }
 
     public void HasFinishNPCMissionTalk()
     {
         hasActivatedMission = true;
+    }
+
+    public void TurnOnFinalMissionPortal(bool state)
+    {
+        PortalManager portalManager = GameObject.FindObjectOfType<PortalManager>();
+        GameObject endMissionPortal = portalManager.ReturnEndPortal();
+        
+        endMissionPortal.SetActive(state);
+    }
+    
+    public void StopTimer()
+    {
+        stopTimer = true;
+    }
+
+    void RestartMission()
+    {
+        canvasManager.GameOverScreen(true);
+        Time.timeScale = 0;
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            timer = missionTimer;
+            Time.timeScale = 1;
+            restartGame = false;
+            SceneManager.LoadScene("Playground");
+        }
+    }
+
+    public void Restart(bool status)
+    {
+        restartGame = status;
     }
 }

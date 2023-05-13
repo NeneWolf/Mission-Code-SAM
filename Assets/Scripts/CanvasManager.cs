@@ -10,6 +10,10 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private GameObject aimingUI;
     [SerializeField] private GameObject samInteractionUI;
     [SerializeField] private GameObject MissionUI;
+    [SerializeField] private GameObject gameOverUI;
+
+
+    [SerializeField] private TextMeshProUGUI missionText;
     [SerializeField] private TextMeshProUGUI countdownTimerUI;
 
 
@@ -38,13 +42,23 @@ public class CanvasManager : MonoBehaviour
         MissionUI.SetActive(status);
     }
     
-    public void MissionNameTime(float timer)
+    public void StartMissionTimer(float timer)
     {
         string minutes = Mathf.Floor(timer / 60).ToString("00");
         string seconds = (timer % 60).ToString("00");
             
        
        countdownTimerUI.text = string.Format("{0}:{1}", minutes,seconds);
+    }
+
+    public void UpdateMissionText(string text)
+    {
+        missionText.text = text;
+    }
+
+    public void GameOverScreen(bool status)
+    {
+        gameOverUI.SetActive(true);
     }
 
     IEnumerator TurnOnCarInstructionsUI()

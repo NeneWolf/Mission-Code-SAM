@@ -10,14 +10,17 @@ public class PortalBehaviour : MonoBehaviour
     [SerializeField] String sceneToLoad;
 
     CanvasManager _canvas;
+    GameManager _gameManager;
 
     bool isAtPortal = false;
 
     private void Awake()
     {
         _canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<CanvasManager>();
+        _gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+
     }
-    
+
     void Update()
     {
         if (!isMissionPortal && Input.GetKeyDown(KeyCode.E) && isAtPortal)
@@ -34,13 +37,17 @@ public class PortalBehaviour : MonoBehaviour
             {
                 _canvas.TurnEInteraction(true);
                 isAtPortal = true;
+                
             }
         }
         else
         {
             if (other.gameObject.tag == "Car")
             {
-                SceneManager.LoadScene(sceneToLoad);
+                _gameManager.StopTimer();
+                _canvas.UpdateMissionText("Mission Success!");
+                //SceneManager.LoadScene(sceneToLoad);
+
             }
         }
     }
