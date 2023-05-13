@@ -8,6 +8,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private GameObject carInstructionsUI;
     [SerializeField] private GameObject aimingUI;
     [SerializeField] private GameObject samInteractionUI;
+    [SerializeField] private GameObject portalInteractionUI;
 
     public void TurnCarInteraction(bool status)
     {
@@ -22,6 +23,11 @@ public class CanvasManager : MonoBehaviour
     public void TurnSamInteraction(bool status)
     {
         samInteractionUI.SetActive(status);
+    }
+
+    public void TurnPortalInteraction(bool status)
+    {
+        portalInteractionUI.SetActive(status);
     }
 
     public void TurnOnCarInstruction()

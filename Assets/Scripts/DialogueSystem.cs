@@ -25,6 +25,10 @@ public class DialogueSystem: MonoBehaviour {
     public bool dialogueEnded = false;
     public bool outOfRange = true;
 
+    bool spokenTo = false;
+
+    float timer = 10.0f;
+
     //public AudioClip audioClip;
     //AudioSource audioSource;
 
@@ -36,6 +40,17 @@ public class DialogueSystem: MonoBehaviour {
 
     void Update()
     {
+        if (spokenTo)
+        {
+            if (timer > 0)
+            {
+                Debug.Log(timer -= Time.deltaTime);
+            }
+            else
+            {
+                timer = 0;
+            }
+        }
     }
 
     public void NPCInteractUI(bool status)
@@ -114,6 +129,7 @@ public class DialogueSystem: MonoBehaviour {
             dialogueEnded = false;
             dialogueActive = false;
             DropDialogue();
+            spokenTo = true;
         }
     }
 
