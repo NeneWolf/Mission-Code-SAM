@@ -9798,6 +9798,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6856538809636980069, guid: 9a912b1a9a911e243822553dbb08553f, type: 3}
+      propertyPath: letterDelay
+      value: 0.05
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a912b1a9a911e243822553dbb08553f, type: 3}
@@ -21356,6 +21360,29 @@ PrefabInstance:
     - target: {fileID: 3897780580809674026, guid: 9bbe43e93a950c1418b388d08bdce0f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897780580809674027, guid: 9bbe43e93a950c1418b388d08bdce0f1, type: 3}
+      propertyPath: sentences.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897780580809674027, guid: 9bbe43e93a950c1418b388d08bdce0f1, type: 3}
+      propertyPath: sentences.Array.data[0]
+      value: 'Tom, I did a little digging after our talk, and I hate to be the bearer
+        of bad news. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897780580809674027, guid: 9bbe43e93a950c1418b388d08bdce0f1, type: 3}
+      propertyPath: sentences.Array.data[1]
+      value: 'It turns out Sam got caught up with a notorious gang involved in illegal
+        activities. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897780580809674027, guid: 9bbe43e93a950c1418b388d08bdce0f1, type: 3}
+      propertyPath: sentences.Array.data[2]
+      value: 'They tracked him down, and things took a turn for the worse. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897780580809674027, guid: 9bbe43e93a950c1418b388d08bdce0f1, type: 3}
+      propertyPath: sentences.Array.data[3]
+      value: You have to find him before it's too late. My source said he was kept
+        in a warehouse somewhere.
       objectReference: {fileID: 0}
     - target: {fileID: 3897780580809674037, guid: 9bbe43e93a950c1418b388d08bdce0f1, type: 3}
       propertyPath: m_Name
