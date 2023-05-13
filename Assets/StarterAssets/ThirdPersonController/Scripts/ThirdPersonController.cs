@@ -165,7 +165,10 @@ namespace StarterAssets
 
         private void LateUpdate()
         {
-            CameraRotation();
+            if (!GameObject.FindObjectOfType<CanvasManager>().GetComponent<CanvasManager>().ReturnGameStatus())
+            {
+                CameraRotation();
+            }
         }
 
         private void AssignAnimationIDs()

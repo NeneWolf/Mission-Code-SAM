@@ -7,6 +7,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] float missionTimer = 720.0f;
+    [SerializeField]
+    GameObject endMissionPortal;
+
+
     float timer;
     public bool hasActivatedMission = false;
     UnityEngine.SceneManagement.Scene currentScene;
@@ -47,10 +51,21 @@ public class GameManager : MonoBehaviour
         
         if (hasActivatedMission && !stopTimer)
         {
-            canvasManager = GameObject.FindObjectOfType<CanvasManager>();
+            canvasManager = FindObjectOfType<CanvasManager>();
             canvasManager.TurnOnMissionUI(true);
             canvasManager.StartMissionTimer(timer);
             StartCountDown();
+
+            PortalManager portalManager = FindObjectOfType<PortalManager>();
+            if(portalManager != null)
+            {
+                GameObject barPortal = portalManager.ReturnBarPortal();
+
+                if (barPortal.activeInHierarchy)
+                {
+                    barPortal.SetActive(false);
+                }
+            }
         }
 
         //Conditions to Restart Mission
@@ -77,12 +92,12 @@ public class GameManager : MonoBehaviour
         hasActivatedMission = true;
     }
 
-    public void TurnOnFinalMissionPortal(bool state)
+    public void TurnOnFinalMissionPortal()
     {
         PortalManager portalManager = GameObject.FindObjectOfType<PortalManager>();
-        GameObject endMissionPortal = portalManager.ReturnEndPortal();
-        
-        endMissionPortal.SetActive(state);
+        endMissionPortal = portalManager.ReturnEndPortal();
+
+        endMissionPortal.SetActive(true);
     }
     
     public void StopTimer()
@@ -92,6 +107,7 @@ public class GameManager : MonoBehaviour
 
     void RestartMission()
     {
+        canvasManager = GameObject.FindObjectOfType<CanvasManager>();
         canvasManager.GameOverScreen(true);
         Time.timeScale = 0;
 

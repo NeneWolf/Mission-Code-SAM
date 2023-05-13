@@ -8,6 +8,9 @@ public class BulletProjectile : MonoBehaviour
     private Rigidbody bulletRigidbody;
     [SerializeField] private float speed = 10f;
 
+    public bool isEnemyBullet = false;
+    public int damage;
+    
     private void Awake()
     {
         bulletRigidbody = GetComponent<Rigidbody>();
@@ -21,6 +24,22 @@ public class BulletProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        print(other.gameObject.tag);
+        if (other.gameObject.tag == "Enemy")
+        {
+            other.gameObject.GetComponent<EnemyAI>().TakeDamage(damage);
+            Destroy(this.gameObject);
+        }
+        else if (other.gameObject.tag == "Player")
+        {
+            other.gameObject.GetComponent<ThirdPersonShooterController>().TakeDamage(damage);
+        }
+        else if (other.gameObject.tag == "Sam" )
+        {
+            other.gameObject.GetComponent<SamBehaviour>().TakeDamage(damage);
+        }
+        
         Destroy(gameObject);
     }
+
 }

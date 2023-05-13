@@ -24,7 +24,7 @@ public class SamEnterCar : MonoBehaviour
             other.gameObject.GetComponent<SamBehaviour>().DisableSamMovement();
 
             _canvas.UpdateMissionText("Return To the Bar");
-            _gameManager.TurnOnFinalMissionPortal(true);
+            _gameManager.TurnOnFinalMissionPortal();
         }
     }
 }

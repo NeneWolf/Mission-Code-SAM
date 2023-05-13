@@ -64,7 +64,8 @@ public class ThirdPersonShooterController : MonoBehaviour
             canShoot = false;
         }
         
-        AimShoot();
+        if(!GameObject.FindObjectOfType<CanvasManager>().GetComponent<CanvasManager>().ReturnGameStatus())
+            AimShoot();
     }
 
     void AimShoot()

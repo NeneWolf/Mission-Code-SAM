@@ -46,11 +46,18 @@ public class PortalBehaviour : MonoBehaviour
             {
                 _gameManager.StopTimer();
                 _canvas.UpdateMissionText("Mission Success!");
-                //SceneManager.LoadScene(sceneToLoad);
+                StartCoroutine(StartCreditCountDown());
 
             }
         }
     }
+
+    IEnumerator StartCreditCountDown()
+    {
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene(3);
+    }
+    
     private void OnTriggerExit(Collider other)
     {
         _canvas.TurnEInteraction(false);
