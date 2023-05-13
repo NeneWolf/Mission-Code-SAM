@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
             timer = missionTimer;
             Time.timeScale = 1;
             restartGame = false;
-            SceneManager.LoadScene("Playground");
+            SceneManager.LoadScene("MissionLevel");
         }
     }
 

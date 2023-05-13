@@ -4,6 +4,8 @@ using UnityEngine;
 using Cinemachine;
 using StarterAssets;
 using UnityEngine.InputSystem;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class ThirdPersonShooterController : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class ThirdPersonShooterController : MonoBehaviour
     private Animator animator;
 
     private CanvasManager _canvas;
+    Scene scene;
 
     [SerializeField] GameObject weapon;
 
@@ -42,7 +45,7 @@ public class ThirdPersonShooterController : MonoBehaviour
     void Start()
     {
         currentBulletCount = maxBullet;
-
+        scene = SceneManager.GetActiveScene();
     }
     
     private void Update()
@@ -50,6 +53,11 @@ public class ThirdPersonShooterController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             currentBulletCount = maxBullet;
+        }
+
+        if (scene.name == "BarLevel")
+        {
+            canShoot = false;
         }
         
         AimShoot();
