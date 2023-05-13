@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CanvasManager : MonoBehaviour
 {
-    [SerializeField] private GameObject carInteractUI;
+    [SerializeField] private GameObject eInteractUI;
     [SerializeField] private GameObject carInstructionsUI;
     [SerializeField] private GameObject aimingUI;
     [SerializeField] private GameObject samInteractionUI;
-    [SerializeField] private GameObject portalInteractionUI;
+    [SerializeField] private GameObject MissionUI;
+    [SerializeField] private TextMeshProUGUI countdownTimerUI;
 
-    public void TurnCarInteraction(bool status)
+
+    public void TurnEInteraction(bool status)
     {
-        carInteractUI.SetActive(status);
+        eInteractUI.SetActive(status);
     }
 
     public void TurnAiming(bool status)
@@ -25,14 +28,23 @@ public class CanvasManager : MonoBehaviour
         samInteractionUI.SetActive(status);
     }
 
-    public void TurnPortalInteraction(bool status)
-    {
-        portalInteractionUI.SetActive(status);
-    }
-
     public void TurnOnCarInstruction()
     {
         StartCoroutine("TurnOnCarInstructionsUI");
+    }
+
+    public void TurnOnMissionUI(bool status)
+    {
+        MissionUI.SetActive(status);
+    }
+    
+    public void MissionNameTime(float timer)
+    {
+        string minutes = Mathf.Floor(timer / 60).ToString("00");
+        string seconds = (timer % 60).ToString("00");
+            
+       
+       countdownTimerUI.text = string.Format("{0}:{1}", minutes,seconds);
     }
 
     IEnumerator TurnOnCarInstructionsUI()

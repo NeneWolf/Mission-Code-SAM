@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class DialogueSystem: MonoBehaviour {
 
+    private GameManager gameManager;
+    
     public Text nameText;
     public Text dialogueText;
 
@@ -27,10 +29,14 @@ public class DialogueSystem: MonoBehaviour {
 
     bool spokenTo = false;
 
-    float timer = 10.0f;
 
     //public AudioClip audioClip;
     //AudioSource audioSource;
+
+    private void Awake()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
 
     void Start()
     {
@@ -42,14 +48,7 @@ public class DialogueSystem: MonoBehaviour {
     {
         if (spokenTo)
         {
-            if (timer > 0)
-            {
-                Debug.Log(timer -= Time.deltaTime);
-            }
-            else
-            {
-                timer = 0;
-            }
+            gameManager.HasFinishNPCMissionTalk();
         }
     }
 
@@ -58,21 +57,8 @@ public class DialogueSystem: MonoBehaviour {
         npcInteractUI.SetActive(status);
     }
 
-    //public void EnterRangeOfNPC()
-    //{
-    //    outOfRange = false;
-    //    dialogueGUI.SetActive(true);
-    //    if (dialogueActive == true)
-    //    {
-    //        dialogueGUI.SetActive(false);
-    //    }
-    //    else
-    //        return;
-    //}
-
     public void NPCName(string name, string[] sentences)
     {
-        print("running NPC data");
         NPCInteractUI(false);
         dialogueBoxGUI.gameObject.SetActive(true);
         

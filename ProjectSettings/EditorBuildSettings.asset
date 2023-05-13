@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Playground.unity
-    guid: e9017d5f96b9f09489b4b37e1d6eb914
+    path: Assets/Scenes/MainMenu.unity
+    guid: 6bd4da8618954b34aa165d98ae755277
+  - enabled: 1
+    path: Assets/Scenes/Mission-SAM.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/Bar Scene.unity
     guid: 3f399a8f9d0cfb84d822322eb556d5a8

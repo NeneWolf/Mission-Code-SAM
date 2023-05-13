@@ -17,14 +17,7 @@ public class PortalBehaviour : MonoBehaviour
     {
         _canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<CanvasManager>();
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (!isMissionPortal && Input.GetKeyDown(KeyCode.E) && isAtPortal)
@@ -39,7 +32,7 @@ public class PortalBehaviour : MonoBehaviour
         {
             if (other.gameObject.tag == "Player")
             {
-                _canvas.TurnPortalInteraction(true);
+                _canvas.TurnEInteraction(true);
                 isAtPortal = true;
             }
         }
@@ -53,7 +46,7 @@ public class PortalBehaviour : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        _canvas.TurnPortalInteraction(false);
+        _canvas.TurnEInteraction(false);
         isAtPortal = false;
     }
 }

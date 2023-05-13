@@ -56,7 +56,7 @@ public class CarEnterExit : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             canDrive = true;
-            _canvas.TurnCarInteraction(true);
+            _canvas.TurnEInteraction(true);
         }
     }
     private void OnTriggerExit(Collider other)
@@ -64,7 +64,7 @@ public class CarEnterExit : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             canDrive = false;
-            _canvas.TurnCarInteraction(false);
+            _canvas.TurnEInteraction(false);
         }
     }
     
@@ -72,7 +72,7 @@ public class CarEnterExit : MonoBehaviour
     {
         if (firstTimeDriving)
             _canvas.TurnOnCarInstruction();
-        _canvas.TurnCarInteraction(false);
+        _canvas.TurnEInteraction(false);
         // Set player to seat position and disable the player controls
         player.transform.position = carSeat.transform.position;
         player.transform.rotation = carSeat.transform.rotation;

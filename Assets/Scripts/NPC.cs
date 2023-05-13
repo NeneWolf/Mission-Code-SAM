@@ -30,7 +30,6 @@ public class NPC : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.F) )
             {
-                print("Here");
                 dialogueSystem.NPCName(Name, sentences);
             }
         }
