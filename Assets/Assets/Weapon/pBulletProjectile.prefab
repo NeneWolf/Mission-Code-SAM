@@ -62,8 +62,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.03850137, y: 0.032773204, z: 0.05383995}
-  m_Center: {x: -0.0004757434, y: 0.005726533, z: 0.005859125}
+  m_Size: {x: 0.08899383, y: 0.062547214, z: 0.062040422}
+  m_Center: {x: 0.002657209, y: 0.007901189, z: 0.009959374}
 --- !u!114 &771012840461486206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21913e8ebe46d274c92b9976fb7ba09e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 30
   isEnemyBullet: 0
   damage: 30
 --- !u!1 &4178269875401894538

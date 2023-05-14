@@ -9,11 +9,14 @@ TagManager:
   - CinemachineTarget
   - NPC
   - Sam
+  - EndPortal
+  - GameManager
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Layer
   - Water
   - UI
   - Ground

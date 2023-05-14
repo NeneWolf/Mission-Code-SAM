@@ -137,11 +137,12 @@ public class SamBehaviour : MonoBehaviour
     
     public void DisableSamMovement()
     {
+        Destroy(this.GetComponent<Rigidbody>());
+        Destroy(this.GetComponent<NavMeshAgent>());
         followPlayer = false;
         friend.enabled = false;
         _anim.SetBool("isSitting", true);
         interactBoxCollider.enabled = false;
-        Destroy(rigidBody);
     }
 
     public void TakeDamage(int damage)
