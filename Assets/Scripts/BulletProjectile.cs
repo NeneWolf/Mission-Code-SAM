@@ -24,7 +24,7 @@ public class BulletProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print(other.gameObject.tag);
+        //print(other.gameObject.tag);
         if (other.gameObject.tag == "Enemy")
         {
             other.gameObject.GetComponent<EnemyAI>().TakeDamage(damage);

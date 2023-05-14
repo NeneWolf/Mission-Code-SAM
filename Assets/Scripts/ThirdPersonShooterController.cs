@@ -11,6 +11,7 @@ public class ThirdPersonShooterController : MonoBehaviour
 {
     [SerializeField] private int health = 100;
     public int currentHealth;
+    AudioManager audioManager;
     
     [SerializeField]
     private CinemachineVirtualCamera aimVirtualCamera;
@@ -27,6 +28,7 @@ public class ThirdPersonShooterController : MonoBehaviour
     public int currentBulletCount;
     bool canShoot = true;
     public float reloadTime = 1f;
+    float currentTime;
     bool isReloading = false;
 
     [SerializeField] private Transform pfBulletProjectile;
@@ -43,6 +45,8 @@ public class ThirdPersonShooterController : MonoBehaviour
         thirdPersonController = GetComponent<ThirdPersonController>();
         animator = GetComponent<Animator>();
         _canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<CanvasManager>();
+        audioManager = GameObject.FindObjectOfType<AudioManager>();
+
     }
     
     void Start()
@@ -50,14 +54,18 @@ public class ThirdPersonShooterController : MonoBehaviour
         currentBulletCount = maxBullet;
         scene = SceneManager.GetActiveScene();
         currentHealth = health;
+        currentTime = reloadTime;
     }
     
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && isReloading == false)
         {
-            currentBulletCount = maxBullet;
+            audioManager.PlaySound("Reload");
+            isReloading = true;
         }
+        
+        Reloading();
 
         if (scene.name == "BarLevel")
         {
@@ -66,6 +74,23 @@ public class ThirdPersonShooterController : MonoBehaviour
         
         if(!GameObject.FindObjectOfType<CanvasManager>().GetComponent<CanvasManager>().ReturnGameStatus())
             AimShoot();
+    }
+
+    void Reloading()
+    {
+        if (isReloading)
+        {
+            if (currentTime > 0)
+            {
+                currentTime -= Time.deltaTime;
+            }
+            else
+            {
+                currentTime = reloadTime;
+                isReloading = false;
+                currentBulletCount = maxBullet;
+            }
+        }
     }
 
     void AimShoot()
@@ -115,6 +140,7 @@ public class ThirdPersonShooterController : MonoBehaviour
     void SpawnBullet()
     {
         currentBulletCount--;
+        audioManager.PlaySound("Shooting");
         Vector3 aimDir = (mouseWorldPosition - spawnBulletPosition.position).normalized;
         Instantiate(pfBulletProjectile, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
         starterAssetsInputs.shoot = false;
