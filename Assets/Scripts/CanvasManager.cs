@@ -19,6 +19,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject controlsInstructionsUI;
     [SerializeField] private GameObject pauseMenuUI;
+    [SerializeField] private GameObject OffLimits;
 
     bool isPaused;
 
@@ -99,6 +100,11 @@ public class CanvasManager : MonoBehaviour
     public void TurnAiming(bool status)
     {
         aimingUI.SetActive(status);
+    }
+
+    public void TurnOffLimits(bool status)
+    {
+        OffLimits.SetActive(status);
     }
 
     public void TurnSamInteraction(bool status)

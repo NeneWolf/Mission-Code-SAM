@@ -12,15 +12,19 @@ public class EnemyAiTutorial : MonoBehaviour
 
     public float health;
 
-    //Patroling
-    public Vector3 walkPoint;
-    bool walkPointSet;
+    ////Patroling
+    //public Vector3 walkPoint;
+    //bool walkPointSet;
     public float walkPointRange;
+
+    bool hasReachedDestination;
+    public Vector3 destination = Vector3.zero;
 
     //Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
     public GameObject projectile;
+    public int bulletDamage;
 
     //States
     public float sightRange, attackRange;
@@ -28,7 +32,7 @@ public class EnemyAiTutorial : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.Find("PlayerObj").transform;
+        player = GameObject.FindGameObjectWithTag("Player").gameObject.transform;
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -45,32 +49,41 @@ public class EnemyAiTutorial : MonoBehaviour
 
     private void Patroling()
     {
-        if (!walkPointSet) SearchWalkPoint();
-
-        if (walkPointSet)
-            agent.SetDestination(walkPoint);
-
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-        //Walkpoint reached
-        if (distanceToWalkPoint.magnitude < 1f)
-            walkPointSet = false;
+        if(destination == Vector3.zero)
+        {
+            Vector3 point = SearchWalkPoint();
+            agent.destination = point;
+            destination = point;
+        }
+        else
+        {
+            float dist = agent.remainingDistance;
+            if (dist != Mathf.Infinity && agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 1)
+            {
+                destination = Vector3.zero;
+            }
+        }
+        
     }
-    private void SearchWalkPoint()
+
+    
+    private Vector3 SearchWalkPoint()
     {
         //Calculate random point in range
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        return new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-            walkPointSet = true;
+        //if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+        //    walkPointSet = true;
     }
 
     private void ChasePlayer()
     {
         agent.SetDestination(player.position);
+
+
     }
 
     private void AttackPlayer()
@@ -84,6 +97,8 @@ public class EnemyAiTutorial : MonoBehaviour
         {
             ///Attack code here
             Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+            rb.GetComponent<BulletProjectile>().isEnemyBullet = true;
+            rb.GetComponent<BulletProjectile>().damage = bulletDamage;
             rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
             rb.AddForce(transform.up * 8f, ForceMode.Impulse);
             ///End of attack code

@@ -14,7 +14,7 @@ public class EnemyAI : MonoBehaviour
     public Transform gunBarrel;  // A reference to the muzzle of a pistol, used to determine the initial position and orientation of the bullet
     public int bulletDamage; // Damage of the shoots
     public float bulletSpeed = 20f;  // bullet speed
-    public Transform gunMuzzle; // Transform of pistol muzzle
+    //public Transform gunMuzzle; // Transform of pistol muzzle
     public float bulletLifeTime = 3f;  // Time the bullet exists (seconds)
 
 
@@ -24,14 +24,16 @@ public class EnemyAI : MonoBehaviour
     private float wanderCooldown = 5f;
     private float wanderRange = 20f;
     private bool isWalking = false;
-    private bool isShooting = false; 
+    private bool isShooting = false;
 
-
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").gameObject.transform;
+    }
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        animator.SetBool("isWalking", false);
         shootTimer = shootCooldown;
     }
 
@@ -134,6 +136,14 @@ public class EnemyAI : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag =="Car")
+        {
+            TakeDamage(100);
         }
     }
 }

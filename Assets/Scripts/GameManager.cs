@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] GameObject LimtsMission;
     [SerializeField] float missionTimer = 720.0f;
     [SerializeField]
     GameObject endMissionPortal;
@@ -64,6 +65,15 @@ public class GameManager : MonoBehaviour
                 if (barPortal.activeInHierarchy)
                 {
                     barPortal.SetActive(false);
+                }
+
+                
+                if(LimtsMission == null)
+                    LimtsMission = GameObject.FindGameObjectWithTag("MissionLimit").gameObject;
+
+                if (LimtsMission != null && LimtsMission.activeInHierarchy == true)
+                {
+                    LimtsMission.SetActive(false);
                 }
             }
         }
