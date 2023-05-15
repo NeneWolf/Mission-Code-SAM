@@ -4,7 +4,6 @@ using UnityEngine;
 using Cinemachine;
 using StarterAssets;
 using UnityEngine.InputSystem;
-using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 
 public class ThirdPersonShooterController : MonoBehaviour
@@ -20,7 +19,7 @@ public class ThirdPersonShooterController : MonoBehaviour
     private Animator animator;
 
     private CanvasManager _canvas;
-    Scene scene;
+    //Scene scene;
 
     [SerializeField] GameObject weapon;
 
@@ -52,7 +51,7 @@ public class ThirdPersonShooterController : MonoBehaviour
     void Start()
     {
         currentBulletCount = maxBullet;
-        scene = SceneManager.GetActiveScene();
+        //scene = SceneManager.GetActiveScene();
         currentHealth = health;
         currentTime = reloadTime;
     }
@@ -67,7 +66,7 @@ public class ThirdPersonShooterController : MonoBehaviour
         
         Reloading();
 
-        if (scene.name == "BarLevel")
+        if (SceneManager.GetActiveScene().name == "BarLevel")
         {
             canShoot = false;
         }
