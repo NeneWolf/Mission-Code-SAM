@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class CanvasMainMenu : MonoBehaviour
 {
+
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+    
     public void OnApplicationQuit()
     {
         Application.Quit();
